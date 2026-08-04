@@ -29,3 +29,5 @@ end
 
 gem "graphql", "~> 2.6"
 gem "rack-cors", "~> 3.0"
+
+gem "rspec-rails", "~> 8.0", groups: [:development, :test]
