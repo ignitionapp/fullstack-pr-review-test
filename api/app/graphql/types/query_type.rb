@@ -31,5 +31,11 @@ module Types
     def todo(id:)
       Todo.find_by(id: id)
     end
+
+    field :tags, [Types::TagType], null: false, description: "All tags in use."
+
+    def tags
+      Tag.order(:name).limit(25)
+    end
   end
 end
