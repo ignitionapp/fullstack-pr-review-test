@@ -6,7 +6,7 @@ import {
   TODOS_QUERY,
   UPDATE_TODO,
   type Todo,
-} from "./graphql/todos";
+} from "./queries";
 
 interface TodosData {
   todos: Todo[];
@@ -38,6 +38,7 @@ export function TodoList() {
     <section>
       <form onSubmit={handleSubmit} className="new-todo">
         <input
+          className="field"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
           placeholder="What needs doing?"
