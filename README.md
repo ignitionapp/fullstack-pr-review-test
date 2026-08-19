@@ -100,6 +100,7 @@ tokens in `src/index.css` rather than literal colour values.
 
 ## Intentionally left out
 
-No tests, no auth, no GraphQL codegen, no Docker, no CI. TypeScript types for GraphQL
-operations are hand-written in `ui/src/graphql/todos.ts`; swap in `graphql-codegen` when the
-schema grows.
+No auth, no GraphQL codegen, no Docker, and no hosted CI — `bin/ci` runs setup and a gem
+audit locally. The API has RSpec specs; the UI has no test runner yet. TypeScript types for
+GraphQL operations are hand-written in `ui/src/todos/queries.ts`; swap in `graphql-codegen`
+when the schema grows.
