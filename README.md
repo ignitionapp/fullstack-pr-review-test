@@ -82,10 +82,16 @@ api/
   config/initializers/cors.rb
 ui/
   src/apolloClient.ts       # Apollo client, reads VITE_GRAPHQL_URL
-  src/graphql/todos.ts      # queries, mutations, Todo type
-  src/TodoList.tsx          # the list + form
+  src/index.css             # colour tokens and shared classes (.field)
+  src/todos/                # one folder per feature
+    TodoList.tsx            # the list + form
+    queries.ts              # queries, mutations, Todo type
   src/App.tsx
 ```
+
+Frontend conventions: keep a feature's component and its queries together under
+`src/<feature>/`, style text inputs with the shared `.field` class, and use the colour
+tokens in `src/index.css` rather than literal colour values.
 
 ## Configuration
 
@@ -94,6 +100,7 @@ ui/
 
 ## Intentionally left out
 
-No tests, no auth, no GraphQL codegen, no Docker, no CI. TypeScript types for GraphQL
-operations are hand-written in `ui/src/graphql/todos.ts`; swap in `graphql-codegen` when the
-schema grows.
+No auth, no GraphQL codegen, no Docker, and no hosted CI — `bin/ci` runs setup and a gem
+audit locally. The API has RSpec specs; the UI has no test runner yet. TypeScript types for
+GraphQL operations are hand-written in `ui/src/todos/queries.ts`; swap in `graphql-codegen`
+when the schema grows.

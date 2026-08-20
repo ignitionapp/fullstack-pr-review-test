@@ -1,6 +1,24 @@
 :root {
   font-family: system-ui, -apple-system, sans-serif;
   color-scheme: light dark;
+
+  /* Colour tokens. Use these instead of literal values so the app keeps
+     working in both light and dark mode. */
+  --surface: light-dark(#ffffff, #1c1c1e);
+  --text: light-dark(#1c1c1e, #f2f2f7);
+  --border: light-dark(#d0d0d0, #48484a);
+  --danger: light-dark(#c0392b, #ff6b5a);
+}
+
+/* Shared text-input styling. Put className="field" on any text input
+   rather than restyling one locally. */
+.field {
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
 }
 
 body {
@@ -28,8 +46,6 @@ h1 {
 
 .new-todo input {
   flex: 1;
-  padding: 0.5rem 0.75rem;
-  font: inherit;
 }
 
 button {
@@ -72,5 +88,5 @@ button {
 }
 
 .error {
-  color: #c0392b;
+  color: var(--danger);
 }
