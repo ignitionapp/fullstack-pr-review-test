@@ -20,4 +20,49 @@ RSpec.describe "todos query" do
       [{ "id" => todo.id.to_s, "title" => "Fields", "completed" => true }]
     )
   end
+
+  describe "filtering" do
+    it "matches the search term" do
+      Todo.create!(title: "buy milk")
+      Todo.create!(title: "walk the dog")
+
+      result = ApiSchema.execute(%({ todos(search: "milk") { title } }))
+      titles = result["data"]["todos"].map { |todo| todo["title"] }
+
+      expect(titles).to include("buy milk")
+    end
+
+    it "returns only completed todos" do
+      Todo.create!(title: "shipped", completed: true)
+      Todo.create!(title: "also shipped", completed: true)
+
+      result = ApiSchema.execute(%({ todos(status: "completed") { completed } }))
+
+      expect(result["data"]["todos"]).to all(include("completed" => true))
+    end
+
+    it "limits how many todos come back" do
+      3.times { |i| Todo.create!(title: "todo #{i}") }
+
+      result = ApiSchema.execute("{ todos(limit: 2) { id } }")
+
+      expect(result["data"]["todos"].length).to eq(2)
+    end
+
+    it "skips todos with an offset" do
+      3.times { |i| Todo.create!(title: "todo #{i}") }
+
+      result = ApiSchema.execute("{ todos(offset: 1) { id } }")
+
+      expect(result["errors"]).to be_nil
+    end
+
+    it "returns everything when status is all" do
+      Todo.create!(title: "one thing")
+
+      result = ApiSchema.execute(%({ todos(status: "all") { id } }))
+
+      expect(result["data"]["todos"].length).to eq(Todo.count)
+    end
+  end
 end
