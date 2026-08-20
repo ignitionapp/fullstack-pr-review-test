@@ -21,10 +21,12 @@ module Types
     field :todos, [Types::TodoType], null: false, description: "All to-do items, newest first." do
       argument :status, String, required: false, description: "Filter by status: all, active or completed."
       argument :search, String, required: false, description: "Free-text match on the title."
+      argument :limit, Integer, required: false, description: "How many todos to return."
+      argument :offset, Integer, required: false, description: "How many todos to skip."
     end
 
-    def todos(status: nil, search: nil)
-      scope = Todo.newest_first.limit(100)
+    def todos(status: nil, search: nil, limit: 25, offset: 0)
+      scope = Todo.newest_first.limit(limit).offset(offset)
 
       if search.present?
         # Case-insensitive match on the title.

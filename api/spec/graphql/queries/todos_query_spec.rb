@@ -41,6 +41,22 @@ RSpec.describe "todos query" do
       expect(result["data"]["todos"]).to all(include("completed" => true))
     end
 
+    it "limits how many todos come back" do
+      3.times { |i| Todo.create!(title: "todo #{i}") }
+
+      result = ApiSchema.execute("{ todos(limit: 2) { id } }")
+
+      expect(result["data"]["todos"].length).to eq(2)
+    end
+
+    it "skips todos with an offset" do
+      3.times { |i| Todo.create!(title: "todo #{i}") }
+
+      result = ApiSchema.execute("{ todos(offset: 1) { id } }")
+
+      expect(result["errors"]).to be_nil
+    end
+
     it "returns everything when status is all" do
       Todo.create!(title: "one thing")
 

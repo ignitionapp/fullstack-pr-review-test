@@ -5,5 +5,7 @@ module Types
     field :create_todo, mutation: Mutations::CreateTodo
     field :update_todo, mutation: Mutations::UpdateTodo
     field :delete_todo, mutation: Mutations::DeleteTodo
+    field :clear_completed, mutation: Mutations::ClearCompleted
+    field :toggle_all, mutation: Mutations::ToggleAll
   end
 end
