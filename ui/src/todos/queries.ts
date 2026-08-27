@@ -7,10 +7,20 @@ export interface Todo {
 }
 
 export const TODOS_QUERY = gql`
-  query Todos {
-    todos {
+  query Todos($status: String, $search: String) {
+    todos(status: $status, search: $search) {
       id
       title
+      completed
+    }
+  }
+`;
+
+export const TODO_COUNTS_QUERY = gql`
+  query TodoCounts {
+    todoCounts {
+      all
+      active
       completed
     }
   }

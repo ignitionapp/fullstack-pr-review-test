@@ -82,6 +82,45 @@ button {
   opacity: 0.5;
 }
 
+.todo-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-tab {
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  color: #2c3e50;
+  border-radius: 4px;
+}
+
+.filter-tab.is-active {
+  background: #2c3e50;
+  color: #ffffff;
+}
+
+.filter-badge {
+  margin-left: 0.35rem;
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.filter-search {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+}
+
+.filter-caption,
+.filter-summary {
+  opacity: 0.7;
+  margin: 0 0 1rem;
+}
+
 .empty,
 .error {
   opacity: 0.7;
